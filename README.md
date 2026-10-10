@@ -28,8 +28,8 @@ brew install chafa figlet
 ## 설치
 
 ```bash
-git clone https://github.com/minchan-ban/claude-banner.git
-cd claude-banner
+git clone https://github.com/minchan-ban/claude-banner-for-mcban-fans.git
+cd claude-banner-for-mcban-fans
 ./install.sh                       # 기본 사진으로 설치
 ./install.sh --photo ~/me.jpg      # 내 사진으로 설치
 ```
@@ -66,7 +66,7 @@ cd claude-banner
 ## 파일 구성
 
 ```
-claude-banner/
+claude-banner-for-mcban-fans/
 ├── startup-banner.sh   # 배너 본체
 ├── config.example.sh   # 설정 예시 (설치 시 config.sh 로 복사)
 ├── install.sh
