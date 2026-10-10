@@ -4,7 +4,9 @@
 
 A noir-style startup banner for Claude Code: renders your photo as terminal pixel art with big figlet text before `claude` launches.
 
-![banner photo](assets/banner-photo.jpeg)
+![claude-banner screenshot](assets/screenshot.png)
+
+<sub>스크린샷은 웹 글꼴이 지원하는 문자로 다시 그린 이미지라서, 실제 터미널에서는 더 촘촘한 블록 문자로 출력됩니다.</sub>
 
 ## 동작 방식
 
@@ -70,7 +72,8 @@ claude-banner/
 ├── install.sh
 ├── uninstall.sh
 └── assets/
-    └── banner-photo.jpeg
+    ├── banner-photo.jpeg   # 기본 사진
+    └── screenshot.png      # README 스크린샷
 ```
 
 ## 라이선스
