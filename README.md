@@ -8,38 +8,48 @@ A noir-style startup banner for Claude Code: renders your photo as terminal pixe
 
 <sub>스크린샷은 웹 글꼴이 지원하는 문자로 다시 그린 이미지라서, 실제 터미널에서는 더 촘촘한 블록 문자로 출력됩니다.</sub>
 
+## 설치 (한 줄이면 끝)
+
+1. **터미널**을 엽니다. (Mac: `⌘ + Space` → "터미널" 입력)
+2. 아래 한 줄을 복사해서 붙여 넣고 `Enter`를 누릅니다.
+
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/minchan-ban/claude-banner-for-mcban-fans/main/install.sh | bash
+   ```
+
+3. 터미널을 **새로 열고** `claude`를 입력하면 배너가 나옵니다.
+
+> 미리 필요한 것: [Claude Code](https://claude.com/claude-code)와 [Homebrew](https://brew.sh)(Mac). 배너에 쓰는 `chafa`, `figlet`은 설치 스크립트가 Homebrew로 알아서 설치합니다.
+
+내 사진으로 바꿔서 설치하려면 이렇게 실행합니다.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/minchan-ban/claude-banner-for-mcban-fans/main/install.sh | bash -s -- --photo ~/me.jpg
+```
+
+## 지우기
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/minchan-ban/claude-banner-for-mcban-fans/main/uninstall.sh | bash
+```
+
+셸 설정 파일에서 배너 부분만 지우고(원본은 `.bak`으로 백업), `~/.claude/banner/` 폴더를 삭제합니다. 한 번만 끄고 싶으면 `NO_CLAUDE_BANNER=1 claude`로 실행합니다.
+
 ## 동작 방식
 
 - `claude()` 셸 함수가 원래 `claude` 명령어를 감쌉니다.
 - 함수는 배너 스크립트를 먼저 실행하고, 그다음 실제 `claude`를 그대로 실행합니다. 인자도 그대로 전달하므로 `claude -p`, `claude --resume` 등은 평소와 똑같이 작동합니다.
 - 사진은 [chafa](https://hpjansson.org/chafa/)로 터미널 폭에 맞춰 픽셀아트로 그리고, 문구는 [figlet](http://www.figlet.org/)으로 중앙 정렬해서 그립니다.
 - 셸 함수이기 때문에 터미널에서 직접 입력할 때만 배너가 나옵니다. 스크립트나 자동화 도구가 `claude`를 실행할 때는 나오지 않습니다.
+- 24비트 컬러를 지원하는 터미널(macOS 기본 터미널, iTerm2, Warp, Ghostty 등)에서 가장 잘 보입니다.
 
-## 요구 사항
+설치 스크립트가 하는 일은 다음과 같습니다.
 
-- macOS 또는 Linux, zsh 또는 bash
-- 24비트 컬러를 지원하는 터미널 (iTerm2, Warp, Ghostty, WezTerm 등)
-- `chafa`, `figlet`
-
-```bash
-brew install chafa figlet
-```
-
-## 설치
-
-```bash
-git clone https://github.com/minchan-ban/claude-banner-for-mcban-fans.git
-cd claude-banner-for-mcban-fans
-./install.sh                       # 기본 사진으로 설치
-./install.sh --photo ~/me.jpg      # 내 사진으로 설치
-```
-
-설치 스크립트는 다음 작업을 합니다.
-
+- `chafa`, `figlet`이 없으면 Homebrew로 설치합니다.
 - `~/.claude/banner/`에 `startup-banner.sh`, `banner-photo.jpeg`, `config.sh`를 복사합니다. `config.sh`가 이미 있으면 덮어쓰지 않습니다.
-- 셸 설정 파일(`~/.zshrc`, bash라면 `~/.bashrc`)에 `claude()` 함수를 추가합니다. 이미 추가되어 있으면 다시 추가하지 않습니다. 다른 파일에 넣으려면 `--rc <파일>`을 지정합니다.
+- 셸 설정 파일(`~/.zshrc`, bash라면 `~/.bashrc`)에 `claude()` 함수를 추가합니다. 여러 번 실행해도 한 번만 추가됩니다.
 
-새 터미널을 열고 `claude`를 실행하면 배너가 나옵니다.
+레포를 직접 클론했다면 `./install.sh`, `./uninstall.sh`로 실행해도 됩니다.
 
 ## 설정
 
@@ -56,13 +66,6 @@ cd claude-banner-for-mcban-fans
 
 사용 가능한 폰트는 `ls "$(figlet -I2)"`로 확인할 수 있습니다. 설정 파일을 다른 곳에 두려면 `CLAUDE_BANNER_CONFIG` 환경 변수로 경로를 지정합니다.
 
-## 배너 끄기
-
-- 한 번만 끄기: `NO_CLAUDE_BANNER=1 claude`
-- 완전히 제거하기: `./uninstall.sh`
-
-`uninstall.sh`는 셸 설정 파일에서 `claude-banner` 블록만 지우고(원본은 `.bak`으로 백업), `~/.claude/banner/` 폴더를 삭제합니다.
-
 ## 파일 구성
 
 ```
@@ -78,4 +81,4 @@ claude-banner-for-mcban-fans/
 
 ## 라이선스
 
-[MIT](LICENSE). 단, `assets/banner-photo.jpeg`는 MIT 라이선스 대상이 아니며 작성자의 초상입니다. 배너를 쓸 때는 본인 사진으로 바꿔서 사용해 주세요.
+[MIT](LICENSE). 단, `assets/banner-photo.jpeg`는 MIT 라이선스 대상이 아니며 작성자의 초상입니다. 개인 터미널 배너로는 자유롭게 써도 되지만, 그 밖의 용도로 사용하거나 재배포하지는 말아 주세요.

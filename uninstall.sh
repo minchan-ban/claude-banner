@@ -3,7 +3,10 @@
 #  - 셸 설정 파일에서 claude() 래퍼 블록을 삭제 (원본은 .bak 으로 백업)
 #  - ~/.claude/banner/ 폴더 삭제
 #
-# 사용법: ./uninstall.sh [--rc 셸설정파일]
+# 한 줄 제거:
+#   curl -fsSL https://raw.githubusercontent.com/minchan-ban/claude-banner-for-mcban-fans/main/uninstall.sh | bash
+#
+# 사용법: uninstall.sh [--rc 셸설정파일]
 set -euo pipefail
 
 DEST="$HOME/.claude/banner"
